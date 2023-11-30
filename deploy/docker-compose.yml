@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   test_isy_task:
-    image: artifactory.adesso-group.com/bva_ea52-docker/isy_auto_task_test:latest
+    image: isy_auto_task_test:latest
     ports:
       - "8181:8080"
     container_name: isy_task_container
