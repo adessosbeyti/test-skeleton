@@ -1,0 +1,37 @@
+@startuml
+interface isyfact.IsyLogger {
+
+}
+interface isyfact.IsyLoggerStandard {
+
+}
+interface isyfact.IsyLoggerFachdaten {
+
+}
+interface isyfact.IsyLoggerTypisiert {
+
+}
+class isyfact.IsyLocationAwareLoggerImpl {
+
+}
+
+interface org.slf4j.LocationAwareLogger{
+  final public int TRACE_INT = 00;
+ +     DEBUG_INT: int
+ +      INFO_INT: int
+ +       WARN_INT: int
+       ERROR_INT: int
+ + log(Marker , String , int , String , Object[], Throwable )
+}
+
+
+isyfact.IsyLoggerFactory"1" *-- "0..*" isyfact.IsyLogger
+isyfact.IsyLoggerStandard <|--  isyfact.IsyLogger
+isyfact.IsyLoggerFachdaten <|-- isyfact.IsyLogger
+isyfact.IsyLoggerTypisiert <|-- isyfact.IsyLogger
+isyfact.IsyLocationAwareLoggerImpl "implements"..> isyfact.IsyLogger
+ org.slf4j.LoggerFactory o-- org.slf4j.Logger
+ org.slf4j.Logger <|-- org.slf4j.LocationAwareLogger
+ org.slf4j.LoggerFactory *-- isyfact.IsyLoggerFactory
+
+@enduml

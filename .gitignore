@@ -1,0 +1,57 @@
+# Ignore user-specific files
+*.log
+*.swp
+*.gz
+*.tmp
+*.DS_Store
+Thumbs.db
+
+# Ignore Eclipse project and build files
+.project
+.classpath
+.metadata
+bin/
+.settings/
+
+# Ignore IntelliJ project and build files
+*.iml
+.idea/
+/out/
+.idea
+*.iws
+*.ipr
+
+# Ignore Maven-specific files
+target/
+.flattened-pom.xml
+HELP.md
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Ignore Java-specific files
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+### STS ###
+.apt_generated
+.factorypath
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/

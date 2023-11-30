@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  test_isy_task:
+    build: .
+    image: artifactory.adesso-group.com/bva_ea52-docker/isy_auto_task_test:latest
+    ports:
+      - "8181:8080"
+    container_name: isy_task_container
+    volumes:
+      - C:/tasks/output/auto/archive:/app/output/archive
+      - C:/tasks/output/auto/backup:/app/output/backup

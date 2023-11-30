@@ -1,0 +1,100 @@
+@startuml
+
+
+enum    logging.MarkerSchluessel {
++  ROOTMARKER
++  KATEGORIE
++  SCHLUESSEL
++  DAUER
++  METHODE
++  AUFRUFPARAMETER
++  ERGEBNIS
++  DATENTYP
+
+}
+
+interface  schnitstelle.IsyLoggerTypisiert {
+}
+
+interface schnitstelle.IsyLoggerStandard {
+}
+interface  schnitstelle.IsyLogger {
+}
+interface  schnitstelle.IsyLoggerFachdaten {
+}
+
+interface  logging.IsyDatentypMarker {
+}
+class  entryPoint.IsyLoggerFactory {
+- {static} Map<String,IsyLogger> LOGGER_CACHE
+- <<Create>> IsyLoggerFactory()
++ {static} IsyLogger getLogger(Class<?>)
+- {static} void pruefeLoggerImplementierung(Object)
+}
+
+abstract class    logging.AbstractIsyDatentypMarker {
+- {static} long serialVersionUID
+}
+enum    logging.Ereignisschluessel {
++  EISYLO01001
+
+- <<Create>> Ereignisschluessel(String)
+}
+
+
+
+class    logging.FachdatenMarker {
+}
+
+
+
+
+class    logging.TechnikdatenMarker {
+}
+interface  IsyMarker {
+}
+class    logging.IsyLocationAwareLoggerImpl {
+- {static} IsyMarker[] FACHDATEN_MARKER
+- {static} IsyMarker[] TECHNIKDATEN_MARKER
+- LocationAwareLogger logger
++ <<Create>> IsyLocationAwareLoggerImpl(LocationAwareLogger)
+- void log(int,String,IsyMarker[],String,String,Object[],Throwable)
+}
+
+enum  logging.LogKategorie {
++  JOURNAL
++  METRIK
++  PROFILING
++  SICHERHEIT
+}
+class    logging.FehlerSchluessel {
+- <<Create>> FehlerSchluessel()
+}
+
+
+
+ logging.AbstractIsyDatentypMarker <|--    logging.PersonenbezogeneDatenMarker
+ IsyMarker <|..    logging.IsyMarkerImpl
+
+
+  logging.IsyMarker <|--  logging.IsyDatentypMarker
+
+ IsyLoggerStandard <|--  IsyLogger
+ IsyLoggerFachdaten <|--  IsyLogger
+ IsyLoggerTypisiert <|--  IsyLogger
+ IsyLoggerFactory "1" *-- "many" IsyLogger
+ IsyDatentypMarker <|..    logging.AbstractIsyDatentypMarker
+ logging.IsyMarkerImpl <|--    logging.AbstractIsyDatentypMarker
+ logging.AbstractIsyDatentypMarker <|--    logging.FachdatenMarker
+ logging.AbstractIsyDatentypMarker <|--    logging.DsgvoArtikel9DatenMarker
+
+ logging.AbstractIsyDatentypMarker <|--    logging.TechnikdatenMarker
+
+ IsyLogger <|..    logging.IsyLocationAwareLoggerImpl
+ IsyMarkerImpl "1" *-- "many" org.slf4j.Marker
+ logging.IsyLocationAwareLoggerImpl o--  org.slf4j.spi.LocationAwareLogger
+ org.slf4j.Marker <|--  IsyMarker
+ org.slf4j.spi.Logger <|--  org.slf4j.spi.LocationAwareLogger
+ org.slf4j.spi.LoggerFactory o-- org.slf4j.spi.Logger
+
+@enduml

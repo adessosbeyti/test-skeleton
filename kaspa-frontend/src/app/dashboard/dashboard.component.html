@@ -1,0 +1,30 @@
+<div class="p-12 max-w-[1440px] m-auto">
+  <div>
+    <h1 class="text-3xl">Dashboard</h1>
+    <p-divider></p-divider>
+  </div>
+  <div>
+    <p-card header="isy-task" [style]="{ width: '50%' }">
+      <div class="max-w-2xl m-auto py-6">
+        <h2>Tasktypen</h2>
+        <p-button label="ArchivTask" class="mr-2 bg-blue-900" (click)="addMessage()"></p-button>
+        <p-button label="BackupTask" class="mr-2"></p-button>
+        <p-button label="StopAll" class="mr-2"></p-button>
+      </div>
+      <div class="max-w-2xl m-auto py-6">
+        <h2>Individueller Task</h2>
+        <form>
+          <div class="p-field py-2">
+            <label for="1">Test:</label>
+            <p-inputMask id="1" placeholder="intervalle etc"></p-inputMask>
+          </div>
+          <div class="p-field py-2">
+            <label for="2">Test:</label>
+            <p-inputMask id="2" placeholder="intervalle etc"></p-inputMask>
+          </div>
+          <p-buttton type="submit" pButton label="Task starten" />
+        </form>
+      </div>
+    </p-card>
+  </div>
+</div>

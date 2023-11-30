@@ -1,0 +1,73 @@
+@startuml
+interface logging.IsyLoggerTypisiert {
+~ void trace(IsyDatentypMarker,String,Object)
+~ void debug(IsyDatentypMarker,String,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,String,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,BaseException,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,String,Throwable,Object)
+~ void warn(IsyDatentypMarker,String,String,Object)
+~ void warn(IsyDatentypMarker,String,BaseException,Object)
+~ void warn(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void warn(IsyDatentypMarker,String,String,Throwable,Object)
+~ void error(IsyDatentypMarker,String,BaseException,Object)
+~ void error(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void error(IsyDatentypMarker,String,String,Throwable,Object)
+~ void error(IsyDatentypMarker,String,String,Object)
+~ void fatal(IsyDatentypMarker,String,BaseException,Object)
+~ void fatal(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void fatal(IsyDatentypMarker,String,String,Throwable,Object)
+~ void fatal(IsyDatentypMarker,String,String,Object)
+}
+interface logging.IsyLoggerFachdaten {
+~ void traceFachdaten(String,Object)
+~ void debugFachdaten(String,Object)
+~ void infoFachdaten(LogKategorie,String,String,Object)
+~ void infoFachdaten(LogKategorie,String,BaseException,Object)
+~ void infoFachdaten(LogKategorie,String,TechnicalRuntimeException,Object)
+~ void infoFachdaten(LogKategorie,String,String,Throwable,Object)
+~ void warnFachdaten(String,BaseException,Object)
+~ void warnFachdaten(String,TechnicalRuntimeException,Object)
+~ void warnFachdaten(String,String,Throwable,Object)
+~ void warnFachdaten(String,String,Object)
+~ void errorFachdaten(String,BaseException,Object)
+~ void errorFachdaten(String,TechnicalRuntimeException,Object)
+~ void errorFachdaten(String,String,Throwable,Object)
+~ void errorFachdaten(String,String,Object)
+~ void fatalFachdaten(String,BaseException,Object)
+~ void fatalFachdaten(String,TechnicalRuntimeException,Object)
+~ void fatalFachdaten(String,String,Throwable,Object)
+~ void fatalFachdaten(String,String,Object)
+}
+interface logging.IsyLoggerStandard {
+~ void trace(String,Object)
+~ void debug(String,Object)
+~ void info(LogKategorie,String,String,Object)
+~ void info(LogKategorie,String,BaseException,Object)
+~ void info(LogKategorie,String,TechnicalRuntimeException,Object)
+~ void info(LogKategorie,String,String,Throwable,Object)
+~ void warn(String,String,Object)
+~ void warn(String,BaseException,Object)
+~ void warn(String,TechnicalRuntimeException,Object)
+~ void warn(String,String,Throwable,Object)
+~ void error(String,BaseException,Object)
+~ void error(String,TechnicalRuntimeException,Object)
+~ void error(String,String,Throwable,Object)
+~ void error(String,String,Object)
+~ void fatal(String,BaseException,Object)
+~ void fatal(String,TechnicalRuntimeException,Object)
+~ void fatal(String,String,Throwable,Object)
+~ void fatal(String,String,Object)
+}
+interface logging.IsyLogger {
+~ boolean isTraceEnabled()
+~ boolean isDebugEnabled()
+~ boolean isInfoEnabled()
+~ boolean isWarnEnabled()
+~ boolean isErrorEnabled()
+~ boolean isFatalEnabled()
+}
+logging.IsyLoggerStandard <|-- .logging.IsyLogger
+logging.IsyLoggerFachdaten <|-- logging.IsyLogger
+logging.IsyLoggerTypisiert <|-- logging.IsyLogger
+@enduml

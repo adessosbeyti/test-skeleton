@@ -1,0 +1,162 @@
+@startuml
+interface IsyLogger {
+~ boolean isTraceEnabled()
+~ boolean isDebugEnabled()
+~ boolean isInfoEnabled()
+~ boolean isWarnEnabled()
+~ boolean isErrorEnabled()
+~ boolean isFatalEnabled()
+}
+interface IsyLoggerStandard {
+~ void trace(String,Object)
+~ void debug(String,Object)
+~ void info(LogKategorie,String,String,Object)
+~ void info(LogKategorie,String,BaseException,Object)
+~ void info(LogKategorie,String,TechnicalRuntimeException,Object)
+~ void info(LogKategorie,String,String,Throwable,Object)
+~ void warn(String,String,Object)
+~ void warn(String,BaseException,Object)
+~ void warn(String,TechnicalRuntimeException,Object)
+~ void warn(String,String,Throwable,Object)
+~ void error(String,BaseException,Object)
+~ void error(String,TechnicalRuntimeException,Object)
+~ void error(String,String,Throwable,Object)
+~ void error(String,String,Object)
+~ void fatal(String,BaseException,Object)
+~ void fatal(String,TechnicalRuntimeException,Object)
+~ void fatal(String,String,Throwable,Object)
+~ void fatal(String,String,Object)
+}
+interface IsyLoggerFachdaten {
+~ void traceFachdaten(String,Object)
+~ void debugFachdaten(String,Object)
+~ void infoFachdaten(LogKategorie,String,String,Object)
+~ void infoFachdaten(LogKategorie,String,BaseException,Object)
+~ void infoFachdaten(LogKategorie,String,TechnicalRuntimeException,Object)
+~ void infoFachdaten(LogKategorie,String,String,Throwable,Object)
+~ void warnFachdaten(String,BaseException,Object)
+~ void warnFachdaten(String,TechnicalRuntimeException,Object)
+~ void warnFachdaten(String,String,Throwable,Object)
+~ void warnFachdaten(String,String,Object)
+~ void errorFachdaten(String,BaseException,Object)
+~ void errorFachdaten(String,TechnicalRuntimeException,Object)
+~ void errorFachdaten(String,String,Throwable,Object)
+~ void errorFachdaten(String,String,Object)
+~ void fatalFachdaten(String,BaseException,Object)
+~ void fatalFachdaten(String,TechnicalRuntimeException,Object)
+~ void fatalFachdaten(String,String,Throwable,Object)
+~ void fatalFachdaten(String,String,Object)
+}
+interface IsyLoggerTypisiert {
+~ void trace(IsyDatentypMarker,String,Object)
+~ void debug(IsyDatentypMarker,String,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,String,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,BaseException,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,String,Throwable,Object)
+~ void warn(IsyDatentypMarker,String,String,Object)
+~ void warn(IsyDatentypMarker,String,BaseException,Object)
+~ void warn(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void warn(IsyDatentypMarker,String,String,Throwable,Object)
+~ void error(IsyDatentypMarker,String,BaseException,Object)
+~ void error(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void error(IsyDatentypMarker,String,String,Throwable,Object)
+~ void error(IsyDatentypMarker,String,String,Object)
+~ void fatal(IsyDatentypMarker,String,BaseException,Object)
+~ void fatal(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void fatal(IsyDatentypMarker,String,String,Throwable,Object)
+~ void fatal(IsyDatentypMarker,String,String,Object)
+}
+class IsyLocationAwareLoggerImpl {
+- String fqcn
+- {static} Throwable DEFAULT_THROWABLE
+- {static} IsyMarker[] FACHDATEN_MARKER
+- {static} IsyMarker[] TECHNIKDATEN_MARKER
+- LocationAwareLogger logger
++ void trace(String,Object)
++ void traceFachdaten(String,Object)
++ void debug(String,Object)
++ void debugFachdaten(String,Object)
++ void info(LogKategorie,String,String,Object)
++ void infoFachdaten(LogKategorie,String,String,Object)
++ void info(LogKategorie,String,BaseException,Object)
++ void infoFachdaten(LogKategorie,String,BaseException,Object)
++ void warn(String,BaseException,Object)
++ void warnFachdaten(String,BaseException,Object)
++ void error(String,BaseException,Object)
++ void errorFachdaten(String,BaseException,Object)
++ void fatal(String,BaseException,Object)
++ void fatalFachdaten(String,BaseException,Object)
+- void logException(int,String,IsyMarker[],String,Object[],BaseException)
+- void logTechnicalRuntimeException(int,String,IsyMarker[],String,Object[],TechnicalRuntimeException)
+- void log(int,String,IsyMarker[],String,String,Object[],Throwable)
+- String ermittleLevelString(int)
+- boolean pruefeIstKategoriePflicht(int)
+- boolean pruefeIstSchluesselPflicht(int)
++ void info(LogKategorie,String,TechnicalRuntimeException,Object)
++ void info(LogKategorie,String,String,Throwable,Object)
++ void infoFachdaten(LogKategorie,String,TechnicalRuntimeException,Object)
++ void infoFachdaten(LogKategorie,String,String,Throwable,Object)
++ void warn(String,TechnicalRuntimeException,Object)
++ void warnFachdaten(String,TechnicalRuntimeException,Object)
++ void error(String,TechnicalRuntimeException,Object)
++ void errorFachdaten(String,TechnicalRuntimeException,Object)
++ void fatal(String,TechnicalRuntimeException,Object)
++ void fatalFachdaten(String,TechnicalRuntimeException,Object)
++ LocationAwareLogger getLogger()
++ void warn(String,String,Throwable,Object)
++ void warnFachdaten(String,String,Throwable,Object)
++ void error(String,String,Throwable,Object)
++ void errorFachdaten(String,String,Throwable,Object)
++ void fatal(String,String,Throwable,Object)
++ void fatalFachdaten(String,String,Throwable,Object)
++ void warn(String,String,Object)
++ void warnFachdaten(String,String,Object)
++ void error(String,String,Object)
++ void errorFachdaten(String,String,Object)
++ void fatal(String,String,Object)
++ void fatalFachdaten(String,String,Object)
++ boolean isTraceEnabled()
++ boolean isDebugEnabled()
++ boolean isInfoEnabled()
++ boolean isWarnEnabled()
++ boolean isErrorEnabled()
++ boolean isFatalEnabled()
++ void trace(IsyDatentypMarker,String,Object)
++ void debug(IsyDatentypMarker,String,Object)
++ void info(LogKategorie,IsyDatentypMarker,String,String,Object)
++ void info(LogKategorie,IsyDatentypMarker,String,BaseException,Object)
++ void info(LogKategorie,IsyDatentypMarker,String,TechnicalRuntimeException,Object)
++ void info(LogKategorie,IsyDatentypMarker,String,String,Throwable,Object)
++ void warn(IsyDatentypMarker,String,String,Object)
++ void warn(IsyDatentypMarker,String,BaseException,Object)
++ void warn(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
++ void warn(IsyDatentypMarker,String,String,Throwable,Object)
++ void error(IsyDatentypMarker,String,BaseException,Object)
++ void error(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
++ void error(IsyDatentypMarker,String,String,Throwable,Object)
++ void error(IsyDatentypMarker,String,String,Object)
++ void fatal(IsyDatentypMarker,String,BaseException,Object)
++ void fatal(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
++ void fatal(IsyDatentypMarker,String,String,Throwable,Object)
++ void fatal(IsyDatentypMarker,String,String,Object)
+}
+
+interface LocationAwareLogger{
+  final public int TRACE_INT = 00;
+ +     DEBUG_INT: int
+ +      INFO_INT: int
+ +       WARN_INT: int
+       ERROR_INT: int
+ + log(Marker , String , int , String , Object[], Throwable )
+}
+
+
+IsyLoggerFactory"1" *-- "0..*" IsyLogger
+IsyLoggerStandard <|--  IsyLogger
+IsyLoggerFachdaten <|-- IsyLogger
+IsyLoggerTypisiert <|-- IsyLogger
+ IsyLocationAwareLoggerImpl ..> IsyLogger
+
+
+@enduml

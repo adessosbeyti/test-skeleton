@@ -1,0 +1,17 @@
+@startuml
+class logging.IsyLoggerFactory {
+- {static} Map<String,IsyLogger> LOGGER_CACHE
+- <<Create>> IsyLoggerFactory()
++ {static} IsyLogger getLogger(Class<?>)
+- {static} void pruefeLoggerImplementierung(Object)
+}
+interface logging.IsyLogger {
+~ boolean isTraceEnabled()
+~ boolean isDebugEnabled()
+~ boolean isInfoEnabled()
+~ boolean isWarnEnabled()
+~ boolean isErrorEnabled()
+~ boolean isFatalEnabled()
+}
+IsyLoggerFactory "1" *-- "many" IsyLogger
+@enduml

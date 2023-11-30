@@ -1,0 +1,99 @@
+= isy= isy-logging Baustein
+:isy-dokumentvorlagen: ../../../../../isy-dokumentvorlagen/
+
+include::{isy-dokumentvorlagen}/docs/common/isyfact-attributes.adoc[]
+
+// tag::inhalt[]
+
+
+
+== Kurze Zusammenfassung
+Die Bausteine der isyFact wurden mit dem Ziel konstruiert, sie in ein Fachanwendungen einzusetzen.
+Eine geeignete Dokumentation ist erforderlich, um die Verwendung der Bausteine einfach und schnell zu gestalten. Die Dokumentation sollte mindestens
+die folgenden Aspekte für die Integration berücksichtigen:
+
+* _Eingangspunkt_: Hierbei handelt es sich um Klassen , welche bei der Integration der Baustein in eine Fachanwendung benötigt werden.
+Der Eingangspunkt soll den Zugriff auf die Schnittstellen ermöglichen. Das Verständnis wird durch ein Klassendiagramm erreicht.
+
+* _Schnittstelle_: Die außerhalb des Bausteins zur Verfügung gestellten Funktionalitäten werden über dedizierte Schnittstellen (Methoden) beschrieben. Zum Verstädnis für die Integration ist die Auflistung
+der Interfaces, die diese Schnittstellen beschreiben, erforderlich. Dies wird durch die Darstellung in Form eines Klassendiagramms erreicht.
+
+* _Big Picture_:
+Der Aufbau aller Bausteine der isyFact folgt einer bestimmten Struktur. Folgende Elemente sind zum besseren Verständnis darzustellen:
+
+** Ein Kernteil, wo die eigentliche Funktionalität des Bausteins implemetiert ist.
+
+** Einen Eingangspunkt zu den Schnittstellen des Bausteins.
+
+** Abhängigkeiten zwischen unterschiedlichen Bausteinen (der Standardbibliotheken).
+
+Ein Klassendiagramm, das diese drei Elemente und ihre Beziehungen (Vererbung und Assoziation) einander veranschaulicht, ist wesentlich für das einfache und
+leichte Verständnis der Bausteine.
+
+
+==== Eingangspunkt
+
+:desc-image-klassen: Eingangspunkt Klassendiagramm
+
+Die final Klasse IsyLoggerFactory stellt den Eingangspunkt des Bausteins isy-logging dar. Die Klasse enthält die folgende statische Methode:
+[,java]
+----
+public static IsyLogger getLogger(Class<?> klasse);
+----
+Hierbei ist leicht zu erkennen, dass diese Klassen-Methode direkt  über die Klasse IsyLoggerFactory aufgerufen werden kann. Diese Klassen-Methode gibt
+Objekt von Type: IsyLogger zurück ein. Dieses Objekt stellt die eigentliche Schnittstelle des Bausteins isy-logging dar und wird im nächsten Abschnitt ausführlic
+beschrieben.
+
+Beispiel:
+[,java]
+----
+ private final IsyLogger LOG = IsyLoggerFactory.getLogger(Beispiel.class);
+----
+[id="image-klassen",reftext="Entry Point"]
+.{desc-image-klassen}
+image::entryPoint.PNG[align="center"]
+
+=== Schnittstelle
+
+:desc-image-klassen: Schnittstelle Klassendiagramm
+Der IsyLogger erbt drei Interfaces, wie im folgenden Klassendiagramm veranschaulicht.
+
+* isyLoggerStandard
+
+* IsyLoggerFachdaten
+
+* IsyLoggerTypisiert
+
+Über das Interface IsyLogger kann der gesamte isy-logging-Baustein verwendet werden, wobei die einzelnen Interfaces verwendet werden müssen.
+
+[id="image-klassen",reftext="Interface"]
+.{desc-image-klassen}
+image::interface.PNG[align="center"]
+
+Beispiel:
+[,java]
+----
+private final IsyLogger LOG = IsyLoggerFactory.getLogger(Beispiel.class);
+private final isyLoggerStandard LOG = IsyLoggerFactory.getLogger(Beispiel.class);
+private final IsyLoggerFachdaten LOG = IsyLoggerFactory.getLogger(Beispiel.class);
+private final IsyLoggerTypisiert LOG = IsyLoggerFactory.getLogger(Beispiel.class);
+----
+=== Big Picture
+:desc-image-klassen: Großes Bild Klassendiagramm
+
+Beispieleklassendiagramm anhand des Bausteins isy-logging.
+
+
+[id="image-klassen",reftext="Isy-logging Klassendiagramm"]
+.{desc-image-klassen}
+image::isy-logging.PNG[align="center"]
+
+
+
+
+
+
+
+
+
+// end::inhalt[]

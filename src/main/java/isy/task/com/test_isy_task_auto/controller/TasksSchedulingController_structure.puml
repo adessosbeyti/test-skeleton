@@ -1,0 +1,196 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "isy.task.com.test_isy_task_auto.controller.TasksSchedulingController",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_3552645 { 
+   	label=task
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_411282024 { 
+   	label=com
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   ArchiveTask1095031645[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ArchiveTask</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   LOG: IsyLoggerStandard [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   RANDOMRANGE: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fileNameHintsProvider: ThreadHandOverData [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   randObject: Random [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   schluessel_archive_task: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   targetFile: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   taskDone: boolean[] [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BackupTask1095031645[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BackupTask</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   LOG: IsyLogger [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   RANDOMRANGE: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   randObject: Random [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   schluessel_backup_task: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   targetFile: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   taskDone: boolean[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   threadHandOverData: ThreadHandOverData [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TasksSchedulingController2129338279[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TasksSchedulingController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   LOG: IsyLogger [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   allRunningTasks: List&lt;TaskRunner&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   archiveTask: ArchiveTask [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   backupTask: BackupTask [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   taskKonfiguration: TaskKonfiguration [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   taskScheduler: TaskScheduler [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   threadHandOverData: ThreadHandOverData [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- convertPlanToTaskPlan(plan: String): Ausfuehrungsplan</TD></TR>
+<TR><TD ALIGN="LEFT" >+ executeArchiveTask(plan: String, timeUnit: String, rate: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ executeArchiveTaskOnce(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ executeBackupTask(plan: String, timeUnit: String, rate: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ executeBackupTaskOnce(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ executeBackupTaskOnce(logs: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- scheduleThisTask(taskID: String, taskObject: AbstractTask, plan: Ausfuehrungsplan, timeUnit: String, rate: Integer)</TD></TR>
+<TR><TD ALIGN="LEFT" >- stopAllRunningAutoTasks(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- stopAllRunningProgTasks(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ stopAutoTasks(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ stopProgTasks(): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ThreadHandOverData1211650125[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ThreadHandOverData</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   logFramework: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   targetFileNameHint: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+ArchiveTask1095031645 -> ThreadHandOverData1211650125[label="fileNameHintsProvider
+[1]"];
+BackupTask1095031645 -> ThreadHandOverData1211650125[label="threadHandOverData
+[1]"];
+TasksSchedulingController2129338279 -> ArchiveTask1095031645[label="archiveTask
+[1]"];
+TasksSchedulingController2129338279 -> BackupTask1095031645[label="backupTask
+[1]"];
+TasksSchedulingController2129338279 -> ThreadHandOverData1211650125[label="threadHandOverData
+[1]"];
+    
+}
+@enduml

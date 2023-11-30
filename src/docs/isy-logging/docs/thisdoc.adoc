@@ -1,0 +1,46 @@
+// lokale Definition: wird durch attributes in pom.xml überschrieben
+:isy-dokumentvorlagen:  ../../../../../../isy-dokumentvorlagen/
+
+= Nutzerhandbuch QS Bericht: Einleitung
+include::{isy-dokumentvorlagen}/docs/common/isyfact-attributes.adoc[]
+
+// tag::inhalt[]
+[[einleitung]]
+== Einleitung
+Qualität Sicherung (QS) Bericht dient dazu, der Lebenszyklus von Jira tickets zu dokumentieren.
+Tickets werden in Jira angelegt und meistens, wenn der ticket keiner Analyse ticket ist, werden software entwicklung aktivitäten in Gitlab ausgeführt.
+Nach der ausführung von einer oder mehreren Merge Requests, werden Software aktivitäten  dann als abgeschlossen bezeichnet.
+Sobald ein Merge Requets im Gitlab beendet ist, Jira wird informiert und der Ticket wird als erledigt bezeichnet.
+Zusammen gefasst, jeder erledigt Jira Ticket is mit einer oder mehreren Merge Requests von Gitlab verbunden.
+Wenn ein Jira ticket, angelegt wird, werden viele (hunderte) daten feldern gespeichert und diese während der entwicklung process aktualisiert.
+Gitlab Aktivitäten, wie code changes, commits, Merge Requets und so weiter werden dokumentieren, wobei daten feldern gespeichert und aktualisiert Wir definieren der ticket Lebenszyklus wie folgt: von der moment der ticket angelegt wird, bis zur moment, wo er als erledigt bezeichnet wird.
+während der lebens phase vom ticket, es werden viele daten in Jira als auch in gitlab aktualisiert oder neue erstellt.
+Die haupt aufgabe von dem QS-Bericht si die zusammen hängenden Daten von jedem ticket zu sammeln und in einem excel datei zu speichern.
+Es ist zu bemerken, dass nicht alle tickets Daten gewünscht sind, das bedeute, dass die daten  bereinigt werden müssen, before sie in einem excel datei gespeichert werden. Nicht jur das, sondern, neue Daten feldern werdend aus existierende federn errechnet werden.
+//Zum <<einleitung, die einleitung>> gelangen
+//Zum <<einleitung>> cytation
+//TIP: gelangen
+
+//NOTE: note
+
+//IMPORTANT: important
+
+//WARNING: warinning
+
+//CAUTION: caution
+
+
+
+*QS-Bericht Anwendung* ist eine eigenständige Anwendung, welche einen Bericht über erledigte tickets in einem Excel datei speichert.
+Die Anwendung kan zwei Bricht typen erstellen. Eine Bricht wird all erledigten Ticket für ein vergangenes Jahr (als Kalendar Jahr bezeichnet) enthalten. Der andere Bricht erstellt all erledigten tickets von anfang des Jahrs bis zur Zeit der Bericht Erstellung. Im Weiteren, werden die beiden Berichte als QS-Jahrs-Bericht un QS-monatlichen-Bericht bezeichnet werden.
+
+
+[[aufbau-und-zweck-des-dokuments]]
+=== Aufbau und Zweck des Dokuments
+
+Dieses Dokument dient folgenden Zwecken:
+
+* Developer Notes zur Anwendung QS-Bericht und allgemein Anwendungsentwicklung
+
+
+// end::inhalt[]

@@ -1,0 +1,24 @@
+<configuration scan="true" scanPeriod="1 minutes">
+    <!-- Eindeutige mIdentifikation der Instanz der Anwendung. -->
+    <contextName>kaspa_application-test</contextName>
+
+    <!-- Pfad der Logdatei, ohne Endung -->
+    <property name="LOGFILE_PATH" value="output/logs/kaspa-test-logs"/>
+    <property name="INCLUDE_MDC" value="false"/>
+    <property name="MAX_LENGTH" value="32000"/>
+
+    <!-- Include der vorkonfigurierten Appender. -->
+    <include resource="resources/isylogging/logback/appender.xml"/>
+    <include resource="resources/isylogging/logback/appender-entwicklung.xml"/>
+
+    <!-- Root-Logger als Grundlage für alle Logger-Instanzen -->
+    <root>
+        <appender-ref ref="DATEI_ANWENDUNG"/>
+        <appender-ref ref="KONSOLE"/>
+    </root>
+
+    <logger name="de.bund.bva.isyfact" additivity="false">
+        <appender-ref ref="DATEI_ANWENDUNG"/>
+        <appender-ref ref="KONSOLE"/>
+    </logger>
+</configuration>

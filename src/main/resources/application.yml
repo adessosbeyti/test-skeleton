@@ -1,0 +1,54 @@
+logging:
+  level:
+    root: info
+
+isy:
+  task:
+     tasks:
+       backupTask:
+                 benutzer: TestUser1
+                 passwort: TestPasswort1
+                 bhkz: BHKZ1
+                 ausfuehrung: ONCE
+                 initial-delay: 5s
+                 host: .*
+       archiveTask:
+                benutzer: TestUser2
+                passwort: TestPasswort2
+                bhkz: BHKZ1
+                ausfuehrung: FIXED_DELAY
+                initial-delay: 10s
+                fixed-delay: 10s
+                host: .*
+
+
+     autostart: true
+     authentication:
+       enabled: true
+  session:
+    filter:
+      locking:
+        active: true
+      logging:
+        active: true
+  logging:
+      anwendung:
+        name: KASPA-TEST
+        typ: GA
+        version: 1.1.1-SNAPSHOT
+      boundary:
+        logge-aufruf: true
+        logge-daten: true
+        logge-daten-bei-exception: true
+        logge-dauer: true
+        logge-ergebnis: true
+      component:
+        logge-aufruf: true
+        logge-daten: true
+        logge-daten-bei-exception: true
+        logge-dauer: true
+        logge-ergebnis: true
+      performancelogging:
+        enabled: false
+
+

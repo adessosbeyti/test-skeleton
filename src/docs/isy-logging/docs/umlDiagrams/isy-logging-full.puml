@@ -1,0 +1,535 @@
+@startuml
+class de.bund.bva.isyfact.logging.exceptions.LogKonfigurationFehler {
+- {static} long serialVersionUID
++ <<Create>> LogKonfigurationFehler(String,String)
+}
+class de.bund.bva.isyfact.logging.impl.PersonenbezogeneDatenMarker {
++ {static} PersonenbezogeneDatenMarker INSTANZ
+- <<Create>> PersonenbezogeneDatenMarker()
+}
+class de.bund.bva.isyfact.logging.impl.IsyMarkerImpl {
+- {static} long serialVersionUID
+- String name
+- String value
+- {static} String ROOT_MARKER_VALUE
+- boolean root
+- List<Marker> references
++ <<Create>> IsyMarkerImpl(MarkerSchluessel,String)
+~ <<Create>> IsyMarkerImpl(String,String,boolean)
++ {static} IsyMarker createRootMarker()
++ String getValue()
++ String getName()
++ boolean remove(Marker)
++ boolean hasChildren()
++ boolean hasReferences()
++ Iterator<Marker> iterator()
++ boolean contains(String)
++ void add(Marker)
++ boolean contains(Marker)
++ boolean equals(Object)
++ int hashCode()
+- boolean compare(String,String)
++ boolean isRootMarker()
++ void addAll(Collection<Marker>)
+}
+enum de.bund.bva.isyfact.logging.impl.LogErrorKategorie {
++  FATAL
++  ERROR
+}
+class de.bund.bva.isyfact.logging.autoconfigure.IsyPerformanceLoggingAutoConfiguration {
+~ String[] pointcuts
++ LoggingMethodInterceptor performanceLogInterceptor()
++ Advisor performanceLogAdvisor(LoggingMethodInterceptor)
+}
+class de.bund.bva.isyfact.logging.util.LogApplicationListener {
+- {static} String SYSTEM_PROPERTY_JAVA_VERSION
+- {static} String SYSTEM_PROPERTY_ZEITZONE
+- {static} String SYSTEM_PROPERTY_DATEIKODIERUNG
+- {static} IsyLoggerStandard LOGGER
+- String systemname
+- String systemart
+- String systemversion
+- ApplicationContext applicationContext
++ <<Create>> LogApplicationListener(String,String,String)
++ void setApplicationContext(ApplicationContext)
++ void onApplicationEvent(ApplicationEvent)
+}
+class de.bund.bva.isyfact.logging.layout.IsyJsonLayout {
+- {static} String LEERE_KORRELATIONSID
+- {static} String ZEITSTEMPEL_ATTR_NAME
+- {static} String PARAMETER_ATTR_NAME
+- {static} String NACHRICHT_ATTR_NAME
+- {static} String EXCEPTION_ATTR_NAME
+- {static} String KORRELATIONSID_ATTR_NAME
+- {static} String MARKER_ATTR_NAME
+- {static} String GEKUERZT_ATTR_NAME
+- int maxLength
++ <<Create>> IsyJsonLayout()
++ String doLayout(ILoggingEvent)
+- String getStringFromFormatter(Map<String,Object>)
+# Map<String,Object> toJsonMap(ILoggingEvent)
+- void processMarker(Marker,Map<String,Object>,List<String>)
+- String pruefeGroesse(Map<String,Object>,String,ILoggingEvent)
+- int feldKuerzen(String,Map<String,Object>,int)
+- int berechneUeberhang(Map<String,Object>)
++ int getMaxLength()
++ void setMaxLength(int)
+}
+class de.bund.bva.isyfact.logging.util.MdcHelper {
++ {static} String MDC_KORRELATIONS_ID
++ {static} String MDC_FACHDATEN
+- {static} String TRENNER
+- {static} IsyLoggerStandard LOG
+- <<Create>> MdcHelper()
++ {static} String entferneKorrelationsId()
++ {static} void entferneKorrelationsIds()
++ {static} String liesKorrelationsId()
++ {static} String pushKorrelationsId(String)
++ {static} boolean liesMarkerFachdaten()
++ {static} void setzeMarkerFachdaten(boolean)
++ {static} void entferneMarkerFachdaten()
+}
+enum de.bund.bva.isyfact.logging.impl.MarkerSchluessel {
++  ROOTMARKER
++  KATEGORIE
++  SCHLUESSEL
++  DAUER
++  METHODE
++  AUFRUFPARAMETER
++  ERGEBNIS
++  DATENTYP
+- String wert
+- <<Create>> MarkerSchluessel(String)
++ String getWert()
+}
+class de.bund.bva.isyfact.logging.exceptions.LoggingTechnicalRuntimeException {
+- {static} long serialVersionUID
+- {static} IsyLoggingFehlertextProvider FEHLERTEXT_PROVIDER
++ <<Create>> LoggingTechnicalRuntimeException(String,String)
++ <<Create>> LoggingTechnicalRuntimeException(String,Throwable,String)
+}
+interface de.bund.bva.isyfact.logging.IsyLoggerTypisiert {
+~ void trace(IsyDatentypMarker,String,Object)
+~ void debug(IsyDatentypMarker,String,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,String,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,BaseException,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void info(LogKategorie,IsyDatentypMarker,String,String,Throwable,Object)
+~ void warn(IsyDatentypMarker,String,String,Object)
+~ void warn(IsyDatentypMarker,String,BaseException,Object)
+~ void warn(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void warn(IsyDatentypMarker,String,String,Throwable,Object)
+~ void error(IsyDatentypMarker,String,BaseException,Object)
+~ void error(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void error(IsyDatentypMarker,String,String,Throwable,Object)
+~ void error(IsyDatentypMarker,String,String,Object)
+~ void fatal(IsyDatentypMarker,String,BaseException,Object)
+~ void fatal(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
+~ void fatal(IsyDatentypMarker,String,String,Throwable,Object)
+~ void fatal(IsyDatentypMarker,String,String,Object)
+}
+abstract class de.bund.bva.isyfact.logging.util.LoggingKonstanten {
++ {static} String TRUE
++ {static} String FALSE
+}
+class de.bund.bva.isyfact.logging.exceptions.FehlerhafterLogeintrag {
+- {static} long serialVersionUID
++ <<Create>> FehlerhafterLogeintrag(String,String)
++ <<Create>> FehlerhafterLogeintrag(String,Throwable,String)
+}
+interface de.bund.bva.isyfact.logging.IsyDatentypMarker {
+}
+interface de.bund.bva.isyfact.logging.IsyLoggerStandard {
+~ void trace(String,Object)
+~ void debug(String,Object)
+~ void info(LogKategorie,String,String,Object)
+~ void info(LogKategorie,String,BaseException,Object)
+~ void info(LogKategorie,String,TechnicalRuntimeException,Object)
+~ void info(LogKategorie,String,String,Throwable,Object)
+~ void warn(String,String,Object)
+~ void warn(String,BaseException,Object)
+~ void warn(String,TechnicalRuntimeException,Object)
+~ void warn(String,String,Throwable,Object)
+~ void error(String,BaseException,Object)
+~ void error(String,TechnicalRuntimeException,Object)
+~ void error(String,String,Throwable,Object)
+~ void error(String,String,Object)
+~ void fatal(String,BaseException,Object)
+~ void fatal(String,TechnicalRuntimeException,Object)
+~ void fatal(String,String,Throwable,Object)
+~ void fatal(String,String,Object)
+}
+class de.bund.bva.isyfact.logging.exceptions.InterceptionFehler {
+- {static} long serialVersionUID
++ <<Create>> InterceptionFehler(String,String)
++ <<Create>> InterceptionFehler(String,Throwable,String)
+}
+class de.bund.bva.isyfact.logging.exceptions.IsyLoggingFehlertextProvider {
+- {static} String NACHRICHTEN_RESOURCE
+- {static} ResourceBundle FEHLERTEXT_BUNDLE
+- {static} String getMessage(String)
++ String getMessage(String,String)
+}
+class de.bund.bva.isyfact.logging.util.BeanGroessePruefer {
+- {static} Map<Class<?>,Integer> PRIMITIVE_TYPEN_GROESSE
++ boolean pruefeGroesse(Object,Long)
+- boolean ermittleGroesseInBytes(Object,Long)
+- List<Field> ermittleAlleInstanzAttribute(Object)
+}
+class de.bund.bva.isyfact.logging.layout.IsyJacksonJsonFormatter {
++ <<Create>> IsyJacksonJsonFormatter()
+- void konfiguriereObjectMapper()
+}
+class de.bund.bva.isyfact.logging.IsyLoggerFactory {
+- {static} Map<String,IsyLogger> LOGGER_CACHE
+- <<Create>> IsyLoggerFactory()
++ {static} IsyLogger getLogger(Class<?>)
+- {static} void pruefeLoggerImplementierung(Object)
+}
+interface de.bund.bva.isyfact.logging.IsyLogger {
+~ boolean isTraceEnabled()
+~ boolean isDebugEnabled()
+~ boolean isInfoEnabled()
+~ boolean isWarnEnabled()
+~ boolean isErrorEnabled()
+~ boolean isFatalEnabled()
+}
+abstract class de.bund.bva.isyfact.logging.impl.AbstractIsyDatentypMarker {
+- {static} long serialVersionUID
++ <<Create>> AbstractIsyDatentypMarker(String)
+}
+enum de.bund.bva.isyfact.logging.impl.Ereignisschluessel {
++  EISYLO01001
++  EISYLO01002
++  EISYLO01003
++  EISYLO01004
++  EISYLO01005
++  DEBUG_LOGGE_DATEN
++  DEBUG_LOGGE_DATEN_GROESSE
++  DEBUG_LOGGE_DATEN_PARAMETER_ZU_GROSS
++  DEBUG_LOG_GEKUERZT
++  EISYLO01011
++  EISYLO01012
++  EISYLO01013
++  EISYLO01014
++  EISYLO01015
++  EISYLO02001
++  EISYLO02002
++  EISYLO02003
++  EISYLO02004
+- String nachricht
+- <<Create>> Ereignisschluessel(String)
++ String getNachricht()
+}
+class de.bund.bva.isyfact.logging.config.IsyLoggingComponentLoggerProperties {
++ <<Create>> IsyLoggingComponentLoggerProperties()
+}
+class de.bund.bva.isyfact.logging.exceptions.SerialisierungException {
+- {static} long serialVersionUID
++ <<Create>> SerialisierungException(String,String)
++ <<Create>> SerialisierungException(String,Throwable,String)
+}
+abstract class de.bund.bva.isyfact.logging.config.AbstractBoundaryLoggerProperties {
+- String pointcut
+- boolean loggeDauer
+- boolean loggeAufruf
+- boolean loggeErgebnis
+- boolean loggeDaten
+- boolean loggeDatenBeiException
+- List<String> converterIncludes
+- List<String> converterExcludes
++ boolean isLoggeDauer()
++ void setLoggeDauer(boolean)
++ boolean isLoggeAufruf()
++ void setLoggeAufruf(boolean)
++ boolean isLoggeErgebnis()
++ void setLoggeErgebnis(boolean)
++ boolean isLoggeDaten()
++ void setLoggeDaten(boolean)
++ boolean isLoggeDatenBeiException()
++ void setLoggeDatenBeiException(boolean)
++ String getPointcut()
++ void setPointcut(String)
++ List<String> getConverterIncludes()
++ void setConverterIncludes(List<String>)
++ List<String> getConverterExcludes()
++ void setConverterExcludes(List<String>)
+}
+class de.bund.bva.isyfact.logging.util.BeanToMapConverter {
+- List<String> includes
+- List<String> excludes
++ {static} String NULL_STRING
++ {static} String HASHCODE_KEY
++ {static} String EXCLUDED_VALUE
++ <<Create>> BeanToMapConverter(List<String>,List<String>)
++ Object convert(Object)
+- Map<String,Object> collectAttributesRecursive(Object,Set<Object>)
+- Object processSimpleValue(Object,Set<Object>)
+- Object processValue(Object,Set<Object>)
+- Object processMapValue(Map<?,?>,Set<Object>)
+- List<Object> processIterableValue(Iterable<?>,Set<Object>)
+- String convertToString(Object)
+# ConversionStyle determineConversionStyle(Object)
+- boolean checkIsInclude(String)
+- boolean checkIsExclude(String)
++ List<String> getIncludes()
++ List<String> getExcludes()
+}
+enum de.bund.bva.isyfact.logging.util.ConversionStyle {
++  RECURSIVE
++  TOSTRING
++  IGNORE
+}
+class de.bund.bva.isyfact.logging.autoconfigure.IsyLoggingAutoConfiguration {
++ IsyLoggingApplicationLoggerProperties isyLoggingApplicationLoggerProperties()
++ IsyLoggingBoundaryLoggerProperties isyLoggingBoundaryLoggerProperties()
++ IsyLoggingComponentLoggerProperties isyLoggingComponentLoggerProperties()
++ LogApplicationListener statusLogger(IsyLoggingApplicationLoggerProperties)
++ LoggingMethodInterceptor boundaryLogInterceptor(IsyLoggingBoundaryLoggerProperties)
++ LoggingMethodInterceptor componentLogInterceptor(IsyLoggingComponentLoggerProperties)
+- LoggingMethodInterceptor createLoggingMethodInterceptor(AbstractBoundaryLoggerProperties)
++ Advisor boundaryLogAdvisorByAnnotation(IsyLoggingBoundaryLoggerProperties,LoggingMethodInterceptor)
++ Advisor componentLogAdvisorByAnnotation(IsyLoggingComponentLoggerProperties,LoggingMethodInterceptor)
+- Advisor setupAdvisor(AbstractBoundaryLoggerProperties,MethodInterceptor)
+}
+interface de.bund.bva.isyfact.logging.util.BeanConverter {
++ Object convert(Object)
+}
+class de.bund.bva.isyfact.logging.util.PerformanceLoggingAspect {
+- LogHelper logHelper
++ Object loggeDauer(ProceedingJoinPoint)
++ void awfUndAfuKlassen()
+- long ermittleDauer(long)
+}
+class de.bund.bva.isyfact.logging.impl.FachdatenMarker {
++ <<Create>> FachdatenMarker()
+}
+class de.bund.bva.isyfact.logging.config.IsyLoggingApplicationLoggerProperties {
+- String name
+- String typ
+- String version
++ String getName()
++ void setName(String)
++ String getVersion()
++ void setVersion(String)
++ String getTyp()
++ void setTyp(String)
+}
+class de.bund.bva.isyfact.logging.util.LoggingMethodInterceptor {
+- LogHelper logHelper
+- boolean loggeAufruf
+- boolean loggeErgebnis
+- boolean loggeDauer
+- boolean loggeDaten
+- boolean loggeDatenBeiException
+- long loggeMaximaleParameterGroesse
+- boolean verwendeStandardKonverter
+- List<String> converterIncludes
+- List<String> converterExcludes
++ <<Create>> LoggingMethodInterceptor()
++ <<Create>> LoggingMethodInterceptor(List<String>,List<String>)
++ Object invoke(MethodInvocation)
+- long ermittleDauer(long)
++ void setLoggeAufruf(boolean)
++ void setLoggeErgebnis(boolean)
++ void setLoggeDauer(boolean)
++ void setLoggeDatenBeiException(boolean)
++ void setLoggeMaximaleParameterGroesse(long)
++ void afterPropertiesSet()
+# BeanConverter erstelleBeanConverter()
++ LogHelper getLogHelper()
++ void setLoggeDaten(boolean)
+}
+class de.bund.bva.isyfact.logging.impl.DsgvoArtikel9DatenMarker {
++ {static} DsgvoArtikel9DatenMarker INSTANZ
+- <<Create>> DsgvoArtikel9DatenMarker()
+}
+class de.bund.bva.isyfact.logging.util.LoggingMethodInvoker {
+- IsyLogger logger
+- LogHelper helper
+- Method methode
+- String nachbarsystemName
+- String nachbarsystemUrl
+- boolean nachbarsystemAufruf
++ <<Create>> LoggingMethodInvoker(Method,IsyLogger,boolean,boolean,boolean,boolean,boolean,long)
++ <<Create>> LoggingMethodInvoker(Method,IsyLogger,boolean,boolean,boolean,boolean,boolean,long,String,String)
++ T fuehreMethodeAus(Object,Object)
+# void erstelleLogVorAuruf()
+# void erstelleLogNachAufruf(boolean,long,Object[],Object)
+}
+class de.bund.bva.isyfact.logging.config.IsyLoggingBoundaryLoggerProperties {
++ <<Create>> IsyLoggingBoundaryLoggerProperties()
+}
+class de.bund.bva.isyfact.logging.util.LogHelper {
+- boolean loggeAufruf
+- boolean loggeErgebnis
+- boolean loggeDauer
+- boolean loggeDaten
+- boolean loggeDatenBeiException
+- long loggeMaximaleParameterGroesse
+- BeanConverter konverter
+- BeanGroessePruefer pruefer
++ <<Create>> LogHelper(boolean,boolean,boolean,boolean,boolean,long)
++ <<Create>> LogHelper(boolean,boolean,boolean,boolean,boolean,long,BeanConverter)
++ {static} BeanToMapConverter erstelleStandardKonverter()
++ void loggeAufruf(IsyLogger,Method)
++ void loggeErgebnis(IsyLogger,Method,boolean,Object[],Object)
++ void loggeDauer(IsyLogger,Method,long,boolean)
++ void loggeNachbarsystemAufruf(IsyLogger,Method,String,String)
++ void loggeNachbarsystemErgebnis(IsyLogger,Method,String,String,boolean)
++ void loggeNachbarsystemDauer(IsyLogger,Method,long,String,String,boolean)
++ long ermittleAktuellenZeitpunkt()
+- {static} IsyMarker erstelleSignatur(Method)
+- {static} String erstelleMethodenname(Method)
++ void setKonverter(BeanToMapConverter)
++ BeanConverter getKonverter()
+}
+class de.bund.bva.isyfact.logging.impl.TechnikdatenMarker {
++ <<Create>> TechnikdatenMarker()
+}
+interface de.bund.bva.isyfact.logging.IsyMarker {
++ boolean isRootMarker()
++ String getValue()
++ void addAll(Collection<Marker>)
+}
+class de.bund.bva.isyfact.logging.impl.IsyLocationAwareLoggerImpl {
+- String fqcn
+- {static} Throwable DEFAULT_THROWABLE
+- {static} IsyMarker[] FACHDATEN_MARKER
+- {static} IsyMarker[] TECHNIKDATEN_MARKER
+- LocationAwareLogger logger
++ <<Create>> IsyLocationAwareLoggerImpl(LocationAwareLogger)
++ void trace(String,Object)
++ void traceFachdaten(String,Object)
++ void debug(String,Object)
++ void debugFachdaten(String,Object)
++ void info(LogKategorie,String,String,Object)
++ void infoFachdaten(LogKategorie,String,String,Object)
++ void info(LogKategorie,String,BaseException,Object)
++ void infoFachdaten(LogKategorie,String,BaseException,Object)
++ void warn(String,BaseException,Object)
++ void warnFachdaten(String,BaseException,Object)
++ void error(String,BaseException,Object)
++ void errorFachdaten(String,BaseException,Object)
++ void fatal(String,BaseException,Object)
++ void fatalFachdaten(String,BaseException,Object)
+- void logException(int,String,IsyMarker[],String,Object[],BaseException)
+- void logTechnicalRuntimeException(int,String,IsyMarker[],String,Object[],TechnicalRuntimeException)
+- void log(int,String,IsyMarker[],String,String,Object[],Throwable)
+- String ermittleLevelString(int)
+- boolean pruefeIstKategoriePflicht(int)
+- boolean pruefeIstSchluesselPflicht(int)
++ void info(LogKategorie,String,TechnicalRuntimeException,Object)
++ void info(LogKategorie,String,String,Throwable,Object)
++ void infoFachdaten(LogKategorie,String,TechnicalRuntimeException,Object)
++ void infoFachdaten(LogKategorie,String,String,Throwable,Object)
++ void warn(String,TechnicalRuntimeException,Object)
++ void warnFachdaten(String,TechnicalRuntimeException,Object)
++ void error(String,TechnicalRuntimeException,Object)
++ void errorFachdaten(String,TechnicalRuntimeException,Object)
++ void fatal(String,TechnicalRuntimeException,Object)
++ void fatalFachdaten(String,TechnicalRuntimeException,Object)
++ LocationAwareLogger getLogger()
++ void warn(String,String,Throwable,Object)
++ void warnFachdaten(String,String,Throwable,Object)
++ void error(String,String,Throwable,Object)
++ void errorFachdaten(String,String,Throwable,Object)
++ void fatal(String,String,Throwable,Object)
++ void fatalFachdaten(String,String,Throwable,Object)
++ void warn(String,String,Object)
++ void warnFachdaten(String,String,Object)
++ void error(String,String,Object)
++ void errorFachdaten(String,String,Object)
++ void fatal(String,String,Object)
++ void fatalFachdaten(String,String,Object)
++ boolean isTraceEnabled()
++ boolean isDebugEnabled()
++ boolean isInfoEnabled()
++ boolean isWarnEnabled()
++ boolean isErrorEnabled()
++ boolean isFatalEnabled()
++ void trace(IsyDatentypMarker,String,Object)
++ void debug(IsyDatentypMarker,String,Object)
++ void info(LogKategorie,IsyDatentypMarker,String,String,Object)
++ void info(LogKategorie,IsyDatentypMarker,String,BaseException,Object)
++ void info(LogKategorie,IsyDatentypMarker,String,TechnicalRuntimeException,Object)
++ void info(LogKategorie,IsyDatentypMarker,String,String,Throwable,Object)
++ void warn(IsyDatentypMarker,String,String,Object)
++ void warn(IsyDatentypMarker,String,BaseException,Object)
++ void warn(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
++ void warn(IsyDatentypMarker,String,String,Throwable,Object)
++ void error(IsyDatentypMarker,String,BaseException,Object)
++ void error(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
++ void error(IsyDatentypMarker,String,String,Throwable,Object)
++ void error(IsyDatentypMarker,String,String,Object)
++ void fatal(IsyDatentypMarker,String,BaseException,Object)
++ void fatal(IsyDatentypMarker,String,TechnicalRuntimeException,Object)
++ void fatal(IsyDatentypMarker,String,String,Throwable,Object)
++ void fatal(IsyDatentypMarker,String,String,Object)
+}
+interface de.bund.bva.isyfact.logging.IsyLoggerFachdaten {
+~ void traceFachdaten(String,Object)
+~ void debugFachdaten(String,Object)
+~ void infoFachdaten(LogKategorie,String,String,Object)
+~ void infoFachdaten(LogKategorie,String,BaseException,Object)
+~ void infoFachdaten(LogKategorie,String,TechnicalRuntimeException,Object)
+~ void infoFachdaten(LogKategorie,String,String,Throwable,Object)
+~ void warnFachdaten(String,BaseException,Object)
+~ void warnFachdaten(String,TechnicalRuntimeException,Object)
+~ void warnFachdaten(String,String,Throwable,Object)
+~ void warnFachdaten(String,String,Object)
+~ void errorFachdaten(String,BaseException,Object)
+~ void errorFachdaten(String,TechnicalRuntimeException,Object)
+~ void errorFachdaten(String,String,Throwable,Object)
+~ void errorFachdaten(String,String,Object)
+~ void fatalFachdaten(String,BaseException,Object)
+~ void fatalFachdaten(String,TechnicalRuntimeException,Object)
+~ void fatalFachdaten(String,String,Throwable,Object)
+~ void fatalFachdaten(String,String,Object)
+}
+enum de.bund.bva.isyfact.logging.LogKategorie {
++  JOURNAL
++  METRIK
++  PROFILING
++  SICHERHEIT
+}
+class de.bund.bva.isyfact.logging.impl.FehlerSchluessel {
++ {static} String FALSCHES_LOGGING_FRAMEWORK
++ {static} String FEHLERHAFTER_EINTRAG_KEIN_SCHLUESSEL
++ {static} String FEHLERHAFTER_EINTRAG_KEINE_KATEGORIE
++ {static} String FEHLENDE_KONFIGURATION_JSON_LAYOUT
++ {static} String LOG_INTERCEPTOR_FEHLER_BEI_AUFRUF
++ {static} String FEHLER_SERIALISIERUNG_AUFRUFPARAMETER
+- <<Create>> FehlerSchluessel()
+}
+
+
+de.bund.bva.isyfact.logging.exceptions.LoggingTechnicalRuntimeException <|-- de.bund.bva.isyfact.logging.exceptions.LogKonfigurationFehler
+de.bund.bva.isyfact.logging.impl.AbstractIsyDatentypMarker <|-- de.bund.bva.isyfact.logging.impl.PersonenbezogeneDatenMarker
+de.bund.bva.isyfact.logging.IsyMarker <|.. de.bund.bva.isyfact.logging.impl.IsyMarkerImpl
+org.springframework.context.ApplicationListener <|.. de.bund.bva.isyfact.logging.util.LogApplicationListener
+org.springframework.context.ApplicationContextAware <|.. de.bund.bva.isyfact.logging.util.LogApplicationListener
+ch.qos.logback.contrib.json.classic.JsonLayout <|-- de.bund.bva.isyfact.logging.layout.IsyJsonLayout
+de.bund.bva.isyfact.exception.TechnicalRuntimeException <|-- de.bund.bva.isyfact.logging.exceptions.LoggingTechnicalRuntimeException
+de.bund.bva.isyfact.logging.exceptions.LoggingTechnicalRuntimeException <|-- de.bund.bva.isyfact.logging.exceptions.FehlerhafterLogeintrag
+de.bund.bva.isyfact.logging.IsyMarker <|-- de.bund.bva.isyfact.logging.IsyDatentypMarker
+de.bund.bva.isyfact.logging.exceptions.LoggingTechnicalRuntimeException <|-- de.bund.bva.isyfact.logging.exceptions.InterceptionFehler
+de.bund.bva.isyfact.exception.FehlertextProvider <|.. de.bund.bva.isyfact.logging.exceptions.IsyLoggingFehlertextProvider
+ch.qos.logback.contrib.jackson.JacksonJsonFormatter <|-- de.bund.bva.isyfact.logging.layout.IsyJacksonJsonFormatter
+de.bund.bva.isyfact.logging.IsyLoggerStandard <|-- de.bund.bva.isyfact.logging.IsyLogger
+de.bund.bva.isyfact.logging.IsyLoggerFachdaten <|-- de.bund.bva.isyfact.logging.IsyLogger
+de.bund.bva.isyfact.logging.IsyLoggerTypisiert <|-- de.bund.bva.isyfact.logging.IsyLogger
+de.bund.bva.isyfact.logging.IsyDatentypMarker <|.. de.bund.bva.isyfact.logging.impl.AbstractIsyDatentypMarker
+de.bund.bva.isyfact.logging.impl.IsyMarkerImpl <|-- de.bund.bva.isyfact.logging.impl.AbstractIsyDatentypMarker
+de.bund.bva.isyfact.logging.config.AbstractBoundaryLoggerProperties <|-- de.bund.bva.isyfact.logging.config.IsyLoggingComponentLoggerProperties
+de.bund.bva.isyfact.logging.exceptions.LoggingTechnicalRuntimeException <|-- de.bund.bva.isyfact.logging.exceptions.SerialisierungException
+de.bund.bva.isyfact.logging.util.BeanConverter <|.. de.bund.bva.isyfact.logging.util.BeanToMapConverter
+de.bund.bva.isyfact.logging.impl.AbstractIsyDatentypMarker <|-- de.bund.bva.isyfact.logging.impl.FachdatenMarker
+org.aopalliance.intercept.MethodInterceptor <|.. de.bund.bva.isyfact.logging.util.LoggingMethodInterceptor
+org.springframework.beans.factory.InitializingBean <|.. de.bund.bva.isyfact.logging.util.LoggingMethodInterceptor
+de.bund.bva.isyfact.logging.impl.AbstractIsyDatentypMarker <|-- de.bund.bva.isyfact.logging.impl.DsgvoArtikel9DatenMarker
+de.bund.bva.isyfact.logging.config.AbstractBoundaryLoggerProperties <|-- de.bund.bva.isyfact.logging.config.IsyLoggingBoundaryLoggerProperties
+de.bund.bva.isyfact.logging.impl.AbstractIsyDatentypMarker <|-- de.bund.bva.isyfact.logging.impl.TechnikdatenMarker
+org.slf4j.Marker <|-- de.bund.bva.isyfact.logging.IsyMarker
+de.bund.bva.isyfact.logging.IsyLogger <|.. de.bund.bva.isyfact.logging.impl.IsyLocationAwareLoggerImpl
+@enduml
