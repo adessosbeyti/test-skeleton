@@ -19,7 +19,7 @@
 	    version: "3.9"
         services:
           test_isy_task:
-            image: artifactory.adesso-group.com/bva_ea52-docker/isy_auto_task_test:latest
+            image: isy_auto_task_test:latest
             ports:
               - "8181:8080"
             container_name: isy_task_container
@@ -29,7 +29,7 @@
         ```
 * Source code installation (development)
 
-  1. Clone the project from adesso BitBucket: https://bitbucket.adesso-group.com/scm/if-qs/test_isy_task.git
+  1. Clone the project from adesso BitBucket:https://github.com/adessosbeyti/test-skeleton.git
   2. import the project into your IDE.
   3. In the project's parent directory, run `docker-compose up -d` to build and run the Docker containers in `detached` mode.
   3. To stop the container just run: `docker-compose down`
