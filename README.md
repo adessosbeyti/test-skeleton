@@ -6,7 +6,7 @@
 
 * Quick summary
 
-	In this document we describe the procedure for testing the automatic creation of tasks of the isy-task module in a Spring application.
+	In this document we describe the procedure for testing the automatic creation of tasks of the isy-task module and using isy-logging (from isyfact-Standards 2.0 Library) in a Spring application.
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
